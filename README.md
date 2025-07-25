@@ -14,9 +14,8 @@ SyncBoard is a live shared canvas where multiple users can draw together simulta
 🔜 **Board Persistence** (Save/load drawings)  
 
 ## Tech Stack  
-**Frontend**: [Your tech, e.g., HTML5 Canvas + Vanilla JS/React]  
-**Backend**: [Your tech, e.g., Node.js + Socket.io]  
-**Deployment**: [If applicable, e.g., Netlify, Render]  
+**Frontend**: [HTML5 Canvas, Vanilla,JS/React]  
+**Backend**: [Node.js. Socket.io]  
 
 ## Use Cases  
 🌟 Remote team scribbles  
