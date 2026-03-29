@@ -1,15 +1,10 @@
 import dotenv from 'dotenv';
-
 import nodemailer, { Transporter } from 'nodemailer';
 
 dotenv.config();
 
 const transporter: Transporter = nodemailer.createTransport({
-  //@ts-ignore
-  service:'gmail',
-  host:"smtp.gmail.com",
-  secure:true,
-  port:'465',
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER as string, 
     pass: process.env.EMAIL_PASS as string,
@@ -24,7 +19,7 @@ export function generateOTP(): string {
 // Function to send OTP via email
 export async function sendOTP(email: string, otp: string): Promise<boolean> {
   const mailOptions = {
-    from: `"Collabodraw" <${process.env.EMAIL_USER}>`,
+    from: `"Syncboard" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'Email Verification OTP',
     text: `Your OTP for email verification is: ${otp}`,

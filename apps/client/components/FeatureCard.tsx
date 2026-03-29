@@ -13,7 +13,7 @@ interface FeatureCardProps {
 export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children, delay = 0, className }) => {
   return (
     <motion.div
-      className={`group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 transition-all duration-300 hover:border-emerald-500/50 overflow-hidden ${className ?? ""}`}
+      className={`group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 transition-all duration-300 hover:border-violet-500/50 overflow-hidden ${className ?? ""}`}
       initial={{ opacity: 0, y: 30, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{
@@ -29,7 +29,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children,
     >
       {/* Gradient overlay on hover */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-indigo-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         initial={false}
       />
 
@@ -37,7 +37,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children,
       <motion.div
         className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
-          background: "linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.1), transparent)",
+          background: "linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.1), transparent)",
           filter: "blur(1px)",
         }}
         initial={false}
@@ -46,7 +46,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children,
       <div className="relative z-10">
         {/* Icon */}
         <motion.div
-          className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-emerald-500/25"
+          className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-violet-500/25"
           whileHover={{
             rotate: [0, -10, 10, 0],
             scale: 1.1,
@@ -65,7 +65,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children,
 
         {/* Title */}
         <motion.h3
-          className="text-xl font-bold mb-4 text-white group-hover:text-emerald-300 transition-colors duration-300"
+          className="text-xl font-bold mb-4 text-white group-hover:text-violet-300 transition-colors duration-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 0.2 }}
@@ -86,7 +86,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children,
 
       {/* Floating particles effect */}
       <motion.div
-        className="absolute top-4 right-4 w-2 h-2 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100"
+        className="absolute top-4 right-4 w-2 h-2 bg-violet-400 rounded-full opacity-0 group-hover:opacity-100"
         animate={{
           y: [0, -10, 0],
           opacity: [0, 1, 0],
@@ -98,7 +98,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children,
         }}
       />
       <motion.div
-        className="absolute bottom-4 left-4 w-1 h-1 bg-emerald-300 rounded-full opacity-0 group-hover:opacity-100"
+        className="absolute bottom-4 left-4 w-1 h-1 bg-indigo-300 rounded-full opacity-0 group-hover:opacity-100"
         animate={{
           y: [0, -8, 0],
           opacity: [0, 0.8, 0],

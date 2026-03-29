@@ -4,13 +4,15 @@ import { AxiosInstance } from "../../lib/axios";
 import { Shapes } from "@/draw/drawShape";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { HTTP_URL } from "../../lib/config";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = HTTP_URL;
 
 export const useAuthStore = create<authState & authActions>((set, get) => ({
     authUser: null,
     isSigningUp: false, 
     isLoggingIn: false,
+    isGuestLoggingIn: false,
     isLoggingOut: false,
     isCheckingAuth: false,
     isCreatingRoom: false,
@@ -53,6 +55,21 @@ export const useAuthStore = create<authState & authActions>((set, get) => ({
             set({authUser: null})
         } finally {
             set({isLoggingIn: false})
+        }
+    },
+
+    guestLogin: async () => {
+        set({isGuestLoggingIn: true})
+        try {
+            const res = await AxiosInstance.post("/user/guest-login")
+            set({authUser: res.data})
+            toast.success("Logged in as Guest")
+            // Optionally redirect here or handle in component
+        } catch (error) {
+            console.error("error during guest login", error)
+            toast.error("Failed to login as guest")
+        } finally {
+            set({isGuestLoggingIn: false})
         }
     },
 

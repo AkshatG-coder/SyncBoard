@@ -16,6 +16,8 @@ export default function EmailVerify() {
     handleGoogleAuthError,
     otpSent,
     resetOtpSent,
+    guestLogin,
+    isGuestLoggingIn
   } = useAuthStore();
 
   const [email, setEmail] = useState("");
@@ -24,10 +26,13 @@ export default function EmailVerify() {
 
   useEffect(() => {
     handleGoogleAuthError();
+    if (useAuthStore.getState().authUser) {
+      router.push("/home-page");
+    }
     return () => {
       resetOtpSent();
     };
-  }, [handleGoogleAuthError, resetOtpSent]);
+  }, [handleGoogleAuthError, resetOtpSent, router]);
 
   async function handleSendOtp(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -103,16 +108,27 @@ export default function EmailVerify() {
           <span className="px-3 text-gray-400 text-sm">or continue with</span>
           <div className="flex-1 h-px bg-gray-700" />
         </div>
-        <button
-          type="button"
-          onClick={handleGoogleSignup}
-          className="flex items-center justify-center gap-3 w-full py-3 rounded-lg bg-white hover:bg-gray-100 transition font-semibold text-gray-900 border border-gray-300"
-        >
-          <Image src="/google.svg" alt="Google" width={22} height={22} />
-          Sign up with Google
-        </button>
+        <div className="flex flex-col gap-3">
+          <button
+            type="button"
+            onClick={handleGoogleSignup}
+            className="flex items-center justify-center gap-3 w-full py-3 rounded-lg bg-white hover:bg-gray-100 transition font-semibold text-gray-900 border border-gray-300"
+          >
+            <Image src="/google.svg" alt="Google" width={22} height={22} />
+            Sign up with Google
+          </button>
+
+          <button
+            type="button"
+            onClick={guestLogin}
+            disabled={isGuestLoggingIn}
+            className="flex items-center justify-center gap-3 w-full py-3 rounded-lg bg-emerald-600/20 border border-emerald-500/30 hover:bg-emerald-600/30 transition font-semibold text-emerald-400 text-sm md:text-base"
+          >
+            {isGuestLoggingIn ? <Loader className="animate-spin size-5" /> : "Continue as Guest"}
+          </button>
+        </div>
       </div>
-      
+
     </div>
   );
 }

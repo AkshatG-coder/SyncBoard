@@ -1,24 +1,18 @@
 "use client"
 import { useAuthStore } from '@/stores/authStore/authStore'
-import { Loader } from 'lucide-react'
+import { Edit3, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { FiCopy } from 'react-icons/fi'  // Importing the copy icon from react-icons
+import { FiCopy, FiCheck } from 'react-icons/fi'
+import { motion, AnimatePresence } from 'motion/react'
 
 const CreateRoom = () => {
     const { createRoom, roomId, isCreatingRoom, joinRoom } = useAuthStore()
     const [copied, setCopied] = useState(false)
-    const [formData, setFormData] = useState({
-        // slug: "",
-        name: ""
-    })
+    const [formData, setFormData] = useState({ name: "" })
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        setFormData((prev) => ({
-            ...prev,
-            [e.target.name]: value
-        }))
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
     const handleSubmit = (e: FormEvent) => {
@@ -30,69 +24,113 @@ const CreateRoom = () => {
         if (roomId) {
             navigator.clipboard.writeText(roomId)
             setCopied(true)
-            setTimeout(() => setCopied(false), 2*1000)
+            setTimeout(() => setCopied(false), 2000)
         }
     }
 
-    function handleJoinRoom(){
-        joinRoom(roomId)
-    }
-
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center text-white px-2">
-            <div className={`${!isCreatingRoom ? "bg-neutral-900 bg-[radial-gradient(circle,_rgb(26,26,26)_0%,_rgb(9,9,9)_100%)]" : "opacity-40"} w-full max-w-sm sm:max-w-md md:max-w-lg p-4 sm:p-8 rounded-2xl shadow-lg shadow-gray-800 z-10`}>
-                <h1 className="text-xl sm:text-2xl font-bold text-center mb-6">Create a Room</h1>
-                <form className="flex flex-col gap-4 sm:gap-6" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Enter Room Name..."
-                        className="bg-gray-700 border border-gray-600 text-white px-4 py-3 rounded-lg text-base sm:text-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
-                        onChange={onChangeHandler}
-                        value={formData.name}
-                        name="name"
-                    />
-                    <button
-                        type="submit"
-                        className="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300 w-full text-base sm:text-lg"
-                    >
-                        Create Room
-                    </button>
-                </form>
+        <div className="min-h-screen flex flex-col items-center justify-center text-white px-4 relative overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 bg-[#07060f] pointer-events-none">
+                <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-violet-700/15 blur-[100px]" />
+                <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-indigo-700/10 blur-[80px]" />
             </div>
 
-            {copied && <div className='fixed top-6 w-screen flex justify-center'>
-                    <div className='bg-gray-700 text-white px-6 py-3 text-md rounded-lg'>Copied to Clipboard 🎉</div>
-            </div>}
-
-            {isCreatingRoom && <div className='z-50 fixed inset-0 flex items-center justify-center'>
-                <div className='flex flex-col items-center justify-start bg-gray-700 rounded-lg h-24 w-56'>
-                    <div className='text-white px-6 py-3 text-md'>Creating a new room</div>
-                    <div>
-                        <Loader className='animate-spin' />
+            <motion.div
+                className="relative z-10 w-full max-w-md"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+                {/* Logo */}
+                <div className="flex items-center justify-center gap-2 mb-8">
+                    <div className="relative w-9 h-9">
+                        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-lg shadow-violet-500/40" />
+                        <Edit3 size={16} className="absolute inset-0 m-auto text-white" />
                     </div>
+                    <span className="font-bold text-lg bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent">
+                        SyncBoard
+                    </span>
                 </div>
-            </div>}
 
-            {/* Show room ID and Join Room Button if a room is created */}
-            {roomId && (
-                <div className="bg-gray-700 p-6 rounded-xl mt-6 text-center relative">
-                    <h2 className="text-lg font-semibold">Room Created Successfully!</h2>
-                    <div className="flex justify-center items-center gap-3">
-                        <h3 className="text-emerald-400 font-bold text-xl mt-2">{roomId}</h3>
+                {/* Card */}
+                <div className={`bg-white/4 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl shadow-violet-900/20 ${isCreatingRoom ? "opacity-50 pointer-events-none" : ""}`}>
+                    <h1 className="text-2xl font-bold text-center mb-2">Create a Board</h1>
+                    <p className="text-gray-400 text-sm text-center mb-7">Name your board and start collaborating</p>
+
+                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder="Board name…"
+                            className="bg-white/6 border border-white/12 text-white px-4 py-3 rounded-xl placeholder-gray-500 focus:ring-2 focus:ring-violet-500 focus:outline-none transition"
+                            onChange={onChangeHandler}
+                            value={formData.name}
+                            name="name"
+                        />
                         <button
-                            className="hover:text-white hover:scale-105 relative top-1 text-gray-400 text-xl"
-                            onClick={copyToClipboard}
+                            type="submit"
+                            className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-3 rounded-xl font-semibold shadow-md shadow-violet-700/30 hover:from-violet-500 hover:to-indigo-500 transition-all duration-300"
                         >
-                            <FiCopy />
+                            Create Board
                         </button>
+                    </form>
+                </div>
+
+                {/* Room created card */}
+                <AnimatePresence>
+                    {roomId && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            className="mt-5 bg-white/4 backdrop-blur-xl border border-violet-500/20 rounded-3xl p-6 text-center shadow-xl shadow-violet-900/20"
+                        >
+                            <p className="text-sm text-violet-300 font-medium mb-1">Board Created!</p>
+                            <div className="flex items-center justify-center gap-3 mb-5">
+                                <span className="text-xl font-bold text-white tracking-wide">{roomId}</span>
+                                <button
+                                    onClick={copyToClipboard}
+                                    className="text-gray-400 hover:text-white transition-colors"
+                                >
+                                    {copied ? <FiCheck className="text-violet-400" /> : <FiCopy />}
+                                </button>
+                            </div>
+                            <Link href={`/canvas/${roomId}`}>
+                                <button
+                                    className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:from-violet-500 hover:to-indigo-500 transition-all duration-300 w-full"
+                                    onClick={() => joinRoom(roomId)}
+                                >
+                                    Enter Board →
+                                </button>
+                            </Link>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.div>
+
+            {/* Loading overlay */}
+            {isCreatingRoom && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                    <div className="bg-white/10 border border-white/20 rounded-2xl px-8 py-6 flex flex-col items-center gap-3">
+                        <Loader2 className="animate-spin text-violet-400 size-8" />
+                        <p className="text-sm text-gray-300">Creating your board…</p>
                     </div>
-                    <Link href={`/canvas/${roomId}`}>
-                        <button className="mt-4 bg-white text-emerald-600 px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300" onClick={handleJoinRoom} >
-                            Join Room
-                        </button>
-                    </Link>
                 </div>
             )}
+
+            {/* Copied toast */}
+            <AnimatePresence>
+                {copied && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="fixed top-6 left-1/2 -translate-x-1/2 bg-violet-600/90 backdrop-blur-sm text-white px-5 py-2.5 rounded-xl text-sm font-medium shadow-lg z-50"
+                    >
+                        Room ID copied! 🎉
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

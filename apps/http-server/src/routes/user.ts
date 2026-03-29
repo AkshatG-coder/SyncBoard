@@ -21,8 +21,13 @@ import { verifyOtpHandler } from "../controlers/verifyOTPHandler";
 const userRouter: Router = Router();
 
 // signup
+import { guestLoginHandler } from "../controlers/guestLoginHandler";
+
 // step 1: initiate signup
 userRouter.post("/initiate-signup", initiateSignUpHandler)
+
+// guest login
+userRouter.post("/guest-login", guestLoginHandler)
 
 // step 2: verify otp
 userRouter.post("/verify-otp", verifyOtpHandler)

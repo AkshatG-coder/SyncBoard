@@ -8,7 +8,7 @@ export const getShapesHandler = async (req: Request, res: Response) => {
 
         const messages = await prismaClient.shape.findMany({
             where: {
-                roomId
+                roomId: roomId as string
             },
             orderBy: {
                 createdAt: "asc"

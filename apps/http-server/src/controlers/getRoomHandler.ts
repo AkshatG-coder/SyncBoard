@@ -7,7 +7,7 @@ export const getRoomHandler = async (req: Request, res: Response) => {
         const roomId = req.params.roomId;
         const room = await prismaClient.room.findFirst({
             where: {
-                id: roomId
+                id: roomId as string
             }
         });
 

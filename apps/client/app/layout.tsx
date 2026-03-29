@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CollaboDraw",
-  description: "Collaborative drawing application",
+  title: "SyncBoard — Collaborate Visually, Instantly",
+  description: "SyncBoard is a real-time collaborative whiteboard for teams, educators, and creators. Draw, brainstorm, and create together.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black bg-[radial-gradient(circle,_rgb(36,36,36)_0%,_rgb(0,0,0)_100%)]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#07060f] bg-[radial-gradient(ellipse_at_top,_rgb(30,20,60)_0%,_rgb(7,6,15)_70%)]`}
       >
         <ClientAuthLoader />
         {children}

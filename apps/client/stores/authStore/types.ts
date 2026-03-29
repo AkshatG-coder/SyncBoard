@@ -14,6 +14,7 @@ export type authState = {
     authUser: IUser | null
     isSigningUp: boolean
     isLoggingIn: boolean
+    isGuestLoggingIn: boolean
     isLoggingOut: boolean
     isCheckingAuth: boolean
     isCreatingRoom: boolean
@@ -33,6 +34,7 @@ export type authState = {
 export type authActions = {
     signup: (data: {name: string, email: string, password: string, confirmPassword: string}) => void
     login: (data: {email: string, password: string}) => void
+    guestLogin: () => void
     checkAuth: () => void
     logout: () => void
     createRoom: (data: {name: string}) => void

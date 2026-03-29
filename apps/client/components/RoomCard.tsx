@@ -60,7 +60,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ id, name, onDelete }) => {
   return (
     <>
       <div
-        className="group relative bg-gradient-to-br from-neutral-900 to-black rounded-2xl p-6 aspect-square cursor-pointer hover:from-gray-700 hover:to-gray-800 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-gray-700 hover:border-gray-600"
+        className="group relative bg-gradient-to-br from-neutral-900 to-[#0a0818] rounded-2xl p-6 aspect-square cursor-pointer hover:from-violet-950/80 hover:to-indigo-950/60 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-white/8 hover:border-violet-500/30"
         onClick={handleJoin}
       >
         {/* 3-dots menu for mobile */}
@@ -100,8 +100,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ id, name, onDelete }) => {
 
         {/* Room icon */}
         <div className="flex justify-center mb-4">
-          <div className="bg-emerald-600/20 p-4 rounded-full">
-            <Users className="text-emerald-400" size={32} />
+          <div className="bg-violet-600/20 p-4 rounded-full">
+            <Users className="text-violet-400" size={32} />
           </div>
         </div>
 
@@ -116,7 +116,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ id, name, onDelete }) => {
         <div className="absolute bottom-4 left-4 right-4">
           <button
             className={`
-              w-full bg-emerald-600 text-white py-3 px-4 rounded-xl font-semibold hover:bg-emerald-700 transition-colors duration-200
+              w-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-violet-500 hover:to-indigo-500 transition-colors duration-200
               sm:opacity-0 sm:group-hover:opacity-100 sm:transform sm:translate-y-2 sm:group-hover:translate-y-0
               opacity-100
             `}
@@ -130,7 +130,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ id, name, onDelete }) => {
         </div>
 
         {/* Subtle glow effect */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-600/8 to-indigo-600/8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </div>
       {showModal && (
         <DeleteRoomModal

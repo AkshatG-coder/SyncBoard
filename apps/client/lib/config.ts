@@ -1,9 +1,3 @@
-const isProduction = process.env.NODE_ENV === "production";
+export const HTTP_URL = process.env.NEXT_PUBLIC_HTTP_URL || (process.env.NODE_ENV === "production" ? "https://syncboard-api.example.com" : "http://localhost:4000");           
 
-export const HTTP_URL = isProduction
-  ? "https://collabodraw-http.mikexdev.in"  
-  : "http://localhost:4000";           
-
-export const WS_URL = isProduction
-  ? "wss://collabodraw-ws.onrender.com"    
-  : "ws://localhost:8080";             
+export const WS_URL = process.env.NEXT_PUBLIC_WS_URL || (process.env.NODE_ENV === "production" ? "wss://syncboard-api.example.com" : "ws://localhost:8080");

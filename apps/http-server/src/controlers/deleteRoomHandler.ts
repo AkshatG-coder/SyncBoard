@@ -1,36 +1,37 @@
 import { prismaClient } from "@repo/db/client";
 import { Request, Response } from "express";
 
-
 export const deleteRoomHandler = async (req: Request, res: Response) => {
     try {
-        const roomId = req.params.roomId;
+        // The Fix: Tell TypeScript this is definitely a string
+        const roomId = req.params.roomId as string;
+
         const checkRoom = await prismaClient.room.findUnique({
             where: {
                 id: roomId
             }
-        })
+        });
 
-        if(!checkRoom){
+        if (!checkRoom) {
             res.status(401).json({
                 msg: "Room not found"
-            })
-            return
+            });
+            return;
         }
 
         await prismaClient.room.delete({
             where: {
                 id: roomId
             }
-        })
+        });
 
         res.status(200).json({
             msg: "room delete successfully"
-        })
+        });
     } catch (error) {
-        console.error(error)
+        console.error(error);
         res.status(500).json({
             msg: "Internal server error"
-        })
+        });
     }
-}
+};

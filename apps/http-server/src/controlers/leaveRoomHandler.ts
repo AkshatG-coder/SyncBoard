@@ -9,7 +9,7 @@ export const leaveRoomHandler = async (req: Request, res: Response) => {
 
         const room = await prismaClient.room.findFirst({
             where: {
-                id: roomId,
+                id: roomId as string,
             },
             select: {
                 id: true, 
@@ -30,7 +30,7 @@ export const leaveRoomHandler = async (req: Request, res: Response) => {
             return
         }
 
-        const isUserInRoom = room.users.some(user => user.id === userId);
+        const isUserInRoom = (room as any).users.some((user: any) => user.id === userId);
         if (!isUserInRoom) {
             res.status(400).json({ msg: "User is not a member of this room" });
             return
@@ -38,7 +38,7 @@ export const leaveRoomHandler = async (req: Request, res: Response) => {
 
         const updatedRoom = await prismaClient.room.update({
             where: {
-                id: roomId
+                id: roomId as string
             },
             data: {
                 users: {
@@ -59,7 +59,7 @@ export const leaveRoomHandler = async (req: Request, res: Response) => {
             }
         })
 
-        res.status(200).json(updatedRoom.users)
+        res.status(200).json((updatedRoom as any).users)
 
     } catch (error) {
         console.error(error)
