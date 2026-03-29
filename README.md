@@ -1,35 +1,46 @@
-🎨 CollaboDraw
-Welcome to CollaboDraw! A high-performance, real-time collaborative whiteboard application built for seamless teamwork and brainstorming.
+# 🎨 CollaboDraw
 
-This repository is structured as a Monorepo (powered by Turborepo). It efficiently houses our frontend client, backend HTTP API, real-time WebSocket server, and shared database packages all under one unified workspace.
+Welcome to **CollaboDraw**! A high-performance, real-time collaborative whiteboard application built for seamless teamwork and brainstorming.
 
-✨ Key Features
-Real-Time Collaboration: Draw and interact with multiple users simultaneously with near-zero latency.
+This repository is a **Monorepo** (powered by Turborepo) that houses the complete ecosystem including the frontend client, backend HTTP API, real-time WebSocket server, and shared database packages.
 
-Room Management: Easily create, share, and join secure drawing rooms.
+---
 
-Scalable Architecture: Built on a monorepo setup for maximum code reusability and isolated deployments.
+## ✨ Key Features
 
-Cloud Database: Reliable and fast data storage using Neon serverless Postgres.
+* **Real-Time Sync:** Draw with multiple users simultaneously with near-zero latency.
+* **Room-Based Architecture:** Create secure rooms with unique IDs to collaborate with specific people.
+* **Persistent Storage:** All drawings and user data are securely stored using Neon Postgres.
+* **Scalable Setup:** Built on a monorepo for maximum code reusability and lightning-fast development.
 
-🛠️ Tech Stack
-Frontend: Next.js, React, Tailwind CSS, Canvas API
+---
 
-Backend: Node.js, Express.js
+## 🛠️ Tech Stack
 
-Real-Time: WebSockets (ws)
+* **Frontend:** [Next.js](https://nextjs.org/), [React](https://reactjs.org/), [Tailwind CSS](https://tailwindcss.com/)
+* **Backend:** [Node.js](https://nodejs.org/), [Express.js](https://expressjs.com/)
+* **Real-Time:** [WebSockets (ws)](https://github.com/websockets/ws)
+* **Database & ORM:** [PostgreSQL (Neon DB)](https://neon.tech/), [Prisma](https://www.prisma.io/)
+* **Monorepo Tooling:** [Turborepo](https://turbo.build/), [pnpm](https://pnpm.io/)
 
-Database & ORM: PostgreSQL (Neon DB), Prisma
+---
 
-Tooling: Turborepo, TypeScript, pnpm
+## 📁 Repository Structure
 
-📁 Repository Structure
-apps/client: The Next.js frontend application.
+* `apps/client`: Next.js frontend application.
+* `apps/http-server`: HTTP API for auth, room management, and data retrieval.
+* `apps/ws-server`: WebSocket server for real-time canvas stroke synchronization.
+* `packages/db`: Shared Prisma schema and database client.
+* `packages/common`: Shared TypeScript types and configuration.
 
-apps/http-server: Node.js REST API for authentication and room management.
+---
 
-apps/ws-server: Real-time WebSocket server for syncing canvas strokes.
+## 🚀 Getting Started
 
-packages/db: Shared Prisma database schema and client.
+### 1. Prerequisites
+Make sure you have **Node.js** and **pnpm** installed.
 
-packages/common: Shared TypeScript configurations and utilities.
+### 2. Installation
+Clone the repo and install dependencies:
+```bash
+pnpm install
