@@ -1,6 +1,6 @@
-# 🎨 CollaboDraw
+# 🎨 SyncBoard
 
-Welcome to **CollaboDraw**! A high-performance, real-time collaborative whiteboard application built for seamless teamwork and brainstorming.
+Welcome to **SyncBoard**! A high-performance, real-time collaborative whiteboard application built for seamless teamwork and brainstorming.
 
 This repository is a **Monorepo** (powered by Turborepo) that houses the complete ecosystem including the frontend client, backend HTTP API, real-time WebSocket server, and shared database packages.
 
